@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BeatForge - AI Beat Studio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo-area">
+                <div class="logo-icon">⚡</div>
+                <h1>BeatForge</h1>
+            </div>
+            <nav class="nav-menu">
+                <a href="#overview" class="nav-item active" data-target="overview">
+                    <span class="icon">🏠</span>
+                    <span class="label">Overview</span>
+                </a>
+                <a href="#generate" class="nav-item" data-target="generate">
+                    <span class="icon">✨</span>
+                    <span class="label">Generate Beat</span>
+                </a>
+                <a href="#custom" class="nav-item" data-target="custom">
+                    <span class="icon">🎹</span>
+                    <span class="label">Make Your Own</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Page 1: Overview -->
+            <section id="overview" class="page-section active">
+                <div class="hero-header">
+                    <h2>BeatForge Studio</h2>
+                    <p>The ultimate AI-powered platform for modern music creation.</p>
+                    <p
+                        style="margin-top: 1rem; color: var(--text-muted); max-width: 600px; margin-left: auto; margin-right: auto;">
+                        Create custom beats in seconds with our AI generator, preview them instantly, and fine-tune
+                        every note in our professional-grade sequencer.
+                    </p>
+                </div>
+                <div class="cards-grid">
+                    <div class="card">
+                        <div class="card-image"
+                            style="background-image: url('https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&w=800&q=80');">
+                        </div>
+                        <div class="card-content">
+                            <h3>Music Creators</h3>
+                            <p>Generate unique backing tracks and beats for your next hit song instantly.</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-image"
+                            style="background-image: url('https://images.unsplash.com/photo-1493225255756-d9584f8606e9?auto=format&fit=crop&w=800&q=80');">
+                        </div>
+                        <div class="card-content">
+                            <h3>Content Creators</h3>
+                            <p>Royalty-free background music tailored to your video's mood and pace.</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-image"
+                            style="background-image: url('https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?auto=format&fit=crop&w=800&q=80');">
+                        </div>
+                        <div class="card-content">
+                            <h3>Aspiring Artists</h3>
+                            <p>Experiment with new genres and sounds without needing expensive gear.</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-image"
+                            style="background-image: url('https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&w=800&q=80');">
+                        </div>
+                        <div class="card-content">
+                            <h3>Podcasts & Audio</h3>
+                            <p>Professional intros, outros, and transitions generated in seconds.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Page 2: Generate Beat -->
+            <section id="generate" class="page-section">
+                <div class="page-header">
+                    <h2>Generate Beat with AI</h2>
+                    <p>Configure your preferences and let our AI craft the perfect loop.</p>
+                </div>
+                <div class="control-panel-container">
+                    <div class="control-card">
+                        <div class="control-group">
+                            <label>Genre</label>
+                            <select id="gen-genre">
+                                <option value="hiphop">Hip-Hop</option>
+                                <option value="lofi">Lo-Fi</option>
+                                <option value="trap">Trap</option>
+                                <option value="edm">EDM</option>
+                                <option value="pop">Pop</option>
+                            </select>
+                        </div>
+                        <div class="control-group">
+                            <label>Mood</label>
+                            <select id="gen-mood">
+                                <option value="chill">Chill</option>
+                                <option value="energetic">Energetic</option>
+                                <option value="dark">Dark</option>
+                                <option value="happy">Happy</option>
+                            </select>
+                        </div>
+                        <div class="control-group">
+                            <label>BPM</label>
+                            <input type="number" id="gen-bpm" value="120" min="60" max="200">
+                        </div>
+                        <div class="control-group">
+                            <label>Length</label>
+                            <div class="pill-selector">
+                                <button class="pill active" data-value="short">Short</button>
+                                <button class="pill" data-value="medium">Medium</button>
+                                <button class="pill" data-value="long">Long</button>
+                            </div>
+                        </div>
+                        <button id="generate-btn" class="primary-btn large-btn">
+                            <span class="btn-text">Generate Beat</span>
+                            <span class="btn-icon">⚡</span>
+                        </button>
+                    </div>
+
+                    <div id="generation-result" class="result-card hidden">
+                        <div class="result-header">
+                            <h3><span id="result-name">Neon Pulse</span></h3>
+                            <span class="badge">AI Generated</span>
+                        </div>
+                        <div class="result-details">
+                            <span id="result-genre">Hip-Hop</span> •
+                            <span id="result-bpm">120 BPM</span> •
+                            <span id="result-mood">Chill</span>
+                        </div>
+                        <div class="waveform-visual">
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                        </div>
+                        <div class="result-actions" style="display: flex; gap: 1rem;">
+                            <button id="preview-btn" class="secondary-btn">
+                                <span class="icon">▶</span> Preview
+                            </button>
+                            <button id="open-in-sequencer-btn" class="primary-btn small">Open in Beatmaker</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Page 3: Make Your Own Beat -->
+            <section id="custom" class="page-section">
+                <div class="sequencer-container">
+                    <div class="sequencer-top-bar">
+                        <div class="transport-controls">
+                            <button id="play-btn" class="icon-btn" title="Play/Stop">
+                                <span class="icon-play">▶</span>
+                                <span class="icon-stop" style="display:none;">⏹</span>
+                            </button>
+                            <div class="bpm-control">
+                                <label>BPM</label>
+                                <input type="number" id="seq-bpm" value="120" min="60" max="240">
+                            </div>
+                        </div>
+                        <div class="sequencer-actions">
+                            <button id="load-generated-btn" class="secondary-btn small">Load Generated Beat</button>
+                            <button id="clear-btn" class="secondary-btn small">Clear</button>
+                            <button id="save-btn" class="primary-btn small">Save</button>
+                        </div>
+                    </div>
+
+                    <div class="sequencer-grid-wrapper">
+                        <div id="sequencer-grid" class="sequencer-grid">
+                            <!-- Grid will be generated by JS -->
+                        </div>
+                    </div>
+
+                    <div class="pattern-selector">
+                        <span class="label">Patterns:</span>
+                        <div class="pattern-buttons">
+                            <button class="pattern-btn active" data-pattern="0">1</button>
+                            <button class="pattern-btn" data-pattern="1">2</button>
+                            <button id="close-modal-btn" class="icon-btn small">✕</button>
+                        </div>
+                        <div id="beat-history-list" class="beat-list">
+                            <!-- History items will be injected here -->
+                            <div class="empty-state">No generated beats yet. Go generate some!</div>
+                        </div>
+                    </div>
+                </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>

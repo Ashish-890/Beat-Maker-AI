@@ -1,0 +1,225 @@
+<!-- BeatBoard Template -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BeatBoard – AI Beat Studio</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="bg-animation"></div>
+    <div class="grid-overlay"></div>
+
+    <div class="app-container">
+        <header>
+            <div class="logo">
+                <span class="logo-icon">🎧</span>
+                <div class="logo-text">
+                    <h1>BeatBoard</h1>
+                    <p>AI Beat Studio</p>
+                </div>
+            </div>
+            <div class="tagline">Generate & Create</div>
+        </header>
+
+        <main class="layout-3col">
+            <!-- LEFT COLUMN: Controls Panel -->
+            <aside id="controls-panel" class="panel panel-controls">
+                <div class="card control-card">
+                    <h2>AI Generator</h2>
+                    <p class="helper-text">Select a mood to generate a unique beat idea.</p>
+
+                    <div class="input-group">
+                        <label for="mood-select">Select Vibe</label>
+                        <select id="mood-select">
+                            <option value="sad">😢 Sad (Emotional)</option>
+                            <option value="hype">🔥 Hype (Club/Trap)</option>
+                            <option value="lofi">🌙 Lofi (Chill/Study)</option>
+                            <option value="drill">🔫 Drill (Dark/Syncopated)</option>
+                            <option value="rnb">💖 R&B (Smooth/Soul)</option>
+                            <option value="dark_trap">💀 Dark Trap (Eerie)</option>
+                        </select>
+                    </div>
+
+                    <button id="generate-btn" class="primary-btn">
+                        <span class="btn-text">Generate Beat Idea</span>
+                        <span class="btn-loader hidden"></span>
+                    </button>
+
+                    <button id="play-btn" class="secondary-btn hidden">
+                        <span class="play-icon">▶</span> Play Preview
+                    </button>
+                </div>
+            </aside>
+
+            <!-- MIDDLE COLUMN: Section A – Generated Beat (AI) -->
+            <section id="generated-section" class="panel panel-generated">
+                <div class="section-header">
+                    <h2>Section A: Generated Beat (AI)</h2>
+                    <span class="badge ai-badge">AI POWERED</span>
+                </div>
+
+                <div id="ai-results-container" class="hidden">
+                    <!-- Mood Overview -->
+                    <div class="card mood-overview-card">
+                        <div class="mood-header">
+                            <h3 id="result-mood">Mood</h3>
+                            <span id="result-drum-tag" class="tag">Pattern Name</span>
+                        </div>
+                        <p id="result-desc">Description goes here...</p>
+                    </div>
+
+                    <!-- Tempo & Key -->
+                    <div class="stats-row">
+                        <div class="card stat-card">
+                            <div class="stat-label">BPM</div>
+                            <div id="result-bpm" class="stat-value">000</div>
+                        </div>
+                        <div class="card stat-card">
+                            <div class="stat-label">Key</div>
+                            <div id="result-key" class="stat-value">C Min</div>
+                        </div>
+                    </div>
+
+                    <!-- Chord Progression -->
+                    <div class="card chords-card">
+                        <h3>Chord Progression</h3>
+                        <div class="progression-grid">
+                            <div class="prog-line">
+                                <span class="label">Roman</span>
+                                <div id="result-roman" class="pill-container"></div>
+                            </div>
+                            <div class="prog-line">
+                                <span class="label">Chords</span>
+                                <div id="result-chords" class="pill-container"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Drum Pattern -->
+                    <div class="card drums-card">
+                        <h3>Drum Pattern</h3>
+                        <div class="drum-info">
+                            <span id="result-drum-name" class="highlight">Pattern Name</span>
+                            <span id="result-drum-desc" class="sub-text">Description</span>
+                        </div>
+
+                        <div class="sequencer-grid">
+                            <div class="seq-row">
+                                <span class="seq-label">HH</span>
+                                <div id="result-hihat" class="seq-steps"></div>
+                            </div>
+                            <div class="seq-row">
+                                <span class="seq-label">SN</span>
+                                <div id="result-snare" class="seq-steps"></div>
+                            </div>
+                            <div class="seq-row">
+                                <span class="seq-label">KK</span>
+                                <div id="result-kick" class="seq-steps"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Empty State for AI -->
+                <div id="ai-empty-state" class="empty-state">
+                    <div class="empty-content">
+                        <div class="empty-icon">🤖</div>
+                        <h3>AI Waiting...</h3>
+                        <p>Select a mood on the left and hit Generate.</p>
+                    </div>
+                </div>
+
+                <!-- Transport Controls (AI) -->
+                <div class="transport transport-generated hidden" id="ai-transport">
+                    <button id="generated-play-btn" class="transport-btn">▶ Play Generated Beat</button>
+                    <button id="generated-stop-btn" class="transport-btn" disabled>■ Stop</button>
+                    <span id="generated-playing-indicator" class="playing-indicator">Idle</span>
+                </div>
+
+                <!-- Error State -->
+                <div id="error-msg" class="error-card hidden">
+                    <div class="error-text">Something went wrong. Please try again.</div>
+                </div>
+            </section>
+
+            <!-- RIGHT COLUMN: Section C – Advanced Beat Maker -->
+            <section id="advanced-section" class="panel panel-advanced">
+                <div class="section-header">
+                    <h2>Section C: Advanced Beat Maker</h2>
+                    <span class="badge custom-badge">PRO MODE</span>
+                </div>
+
+                <!-- Song Settings -->
+                <div id="advanced-settings" class="card">
+                    <div class="settings-row">
+                        <div class="setting-group">
+                            <label>BPM</label>
+                            <input type="number" id="adv-bpm" value="90" min="60" max="200">
+                        </div>
+                        <div class="setting-group">
+                            <label>Key</label>
+                            <select id="adv-key">
+                                <option value="A minor">A Minor</option>
+                                <option value="C major">C Major</option>
+                                <option value="G major">G Major</option>
+                                <option value="D minor">D Minor</option>
+                                <option value="E minor">E Minor</option>
+                                <option value="F# minor">F# Minor</option>
+                                <option value="G minor">G Minor</option>
+                                <option value="B minor">B Minor</option>
+                            </select>
+                        </div>
+                        <div class="setting-group">
+                            <label>Scale</label>
+                            <select id="adv-scale">
+                                <option value="minor">Minor</option>
+                                <option value="major">Major</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Big Grid -->
+                <div id="advanced-grid-card" class="card">
+                    <h3>Drum & Beat Grid (32 Steps)</h3>
+                    <div id="advanced-grid">
+                        <!-- Grid injected by JS -->
+                    </div>
+                </div>
+
+                <!-- Transport for Advanced Beat -->
+                <div class="transport transport-advanced">
+                    <button id="advanced-play-btn" class="transport-btn">▶ Play My Advanced Beat</button>
+                    <button id="advanced-stop-btn" class="transport-btn" disabled>■ Stop</button>
+                    <span id="advanced-playing-indicator" class="playing-indicator">Idle</span>
+                </div>
+
+                <!-- Import / Export -->
+                <div id="advanced-import-card" class="card">
+                    <h3>Import / Export Beat</h3>
+                    <textarea id="advanced-import-text" placeholder="Paste beat JSON or text here..."></textarea>
+                    <div class="import-buttons">
+                        <button id="advanced-import-btn" class="action-btn">Import Beat</button>
+                        <button id="advanced-export-text-btn" class="action-btn">Copy as Text</button>
+                        <button id="advanced-export-json-btn" class="action-btn">Copy as JSON</button>
+                    </div>
+                    <div id="advanced-import-status" class="import-status"></div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="/static/audio_engine.js"></script>
+    <script src="/static/app.js"></script>
+</body>
+
+</html>
