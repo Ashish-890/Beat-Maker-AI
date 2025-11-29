@@ -75,12 +75,18 @@ beatmaker/
 
 ### 2. Run the Application
 
-#### Option A: Web Interface (Recommended)
-Start the local server to use the full web app experience:
+#### Option A: BeatForge Web Interface (Flagship)
+The flagship web experience is located in the `BeatForge` folder.
+1.  Navigate to the `BeatForge` directory.
+2.  Open `index.html` directly in your browser.
+
+*Alternatively, for a better experience (to avoid browser restrictions), serve it locally:*
 ```bash
-python app.py
+# From the project root
+cd BeatForge
+python -m http.server 8000
 ```
-Open your browser and go to: [http://127.0.0.1:8000](http://127.0.0.1:8000)
+Then open your browser and go to: [http://localhost:8000](http://localhost:8000)
 
 #### Option B: Command Line Interface (CLI)
 Generate beat ideas directly in your terminal:
